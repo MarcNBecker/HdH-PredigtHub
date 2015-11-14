@@ -1,0 +1,56 @@
+[
+  {
+  	"title": "Predigtreihe",
+  	"coverImage": "resources/img/logo.png",
+  	"sermons": [
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		}
+  	]
+  },
+  {
+  	"title": "Predigtreihe",
+  	"coverImage": "resources/img/logo.png",
+  	"sermons": [
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		},
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		}
+  	]
+  },
+  {
+  	"title": "Predigtreihe",
+  	"coverImage": "resources/img/logo.png",
+  	"sermons": [
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		},
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		},
+  		{
+  			"video": "Video",
+  			"audio": "Audio",
+  			"description": "Text",
+  			"title": "Predigt"
+  		}
+  	]
+  }
+]

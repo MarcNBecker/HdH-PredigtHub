@@ -1,0 +1,19 @@
+body {
+	font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.general-spacing {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.general-inner-spacing-tb {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.general-inner-spacing-lr {
+	padding-left: 10px;
+	padding-right: 10px;
+}

@@ -1,44 +1,113 @@
 <!doctype html>
 <html>
-<head>
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
-  </script>
-  <link rel="import"
-        href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
-  <link rel="import"
-        href="bower_components/paper-header-panel/paper-header-panel.html">
-  <link rel="import"
-        href="bower_components/paper-toolbar/paper-toolbar.html">
-  <link rel="import"
-        href="bower_components/paper-icon-button/paper-icon-button.html">
-  <link rel="import"
-        href="bower_components/iron-icons/iron-icons.html">
-  <link rel="import"
-        href="bower_components/iron-flex-layout/iron-flex-layout.html">
-  <link rel="import"
-        href="bower_components/font-roboto/roboto.html">
-  <style>
-    body {
-      font-family: Roboto, 'Noto', 'Helvetica Neue',  
-                   Helvetica, Arial, sans-serif;
-    }
-  </style>
-</head>
-<body class="fullbleed vertical layout">
-  <paper-drawer-panel class="flex">
-    <paper-header-panel drawer>
-      <paper-toolbar>
-        <div>Application</div>
-      </paper-toolbar>
-      <div> Drawer content... </div>
-    </paper-header-panel>
-    <paper-header-panel main>
-      <paper-toolbar>
-        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-        <div>Title</div>
-      </paper-toolbar>
-      <div> Main content... </div>
-    </paper-header-panel>
-  </paper-drawer-panel>
-</body>
+  <head profile="http://www.w3.org/2005/10/profile">
+    <!-- Favicon -->
+    <link rel="icon" 
+          type="image/png" 
+          href="resources/img/favicon.png">
+
+    <!-- Polymer dependencies -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import"
+          href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+    <link rel="import"
+          href="bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import"
+          href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import"
+          href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import"
+          href="bower_components/paper-material/paper-material.html">
+    <link rel="import"
+          href="bower_components/paper-menu/paper-menu.html">
+    <link rel="import"
+          href="bower_components/paper-menu/paper-submenu.html">
+    <link rel="import"
+          href="bower_components/paper-item/paper-item.html">
+    <link rel="import"
+          href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import"
+          href="bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import"
+          href="bower_components/iron-list/iron-list.html">
+    <link rel="import"
+          href="bower_components/iron-collapse/iron-collapse.html">
+    <link rel="import"
+          href="bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import"
+          href="bower_components/font-roboto/roboto.html">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="resources/styles/main.css" type="text/css" media="screen" />
+
+  </head>
+
+  <body class="fullbleed vertical layout" unresolved>
+    <template is="dom-bind">
+      <iron-ajax url="server/data.json" last-response="{{data}}" auto></iron-ajax>
+      <paper-drawer-panel class="flex">
+      
+        <!-- Drawer -->
+        <paper-header-panel drawer>
+          <paper-toolbar>
+            <div>Predigtreihen</div>
+          </paper-toolbar>
+          <paper-menu>
+            <template is="dom-repeat" items="[[data]]" as="series">
+              <paper-submenu>
+                <paper-item class="menu-trigger">[[series.title]]</paper-item>
+                <paper-menu class="menu-content">
+                  <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
+                    <paper-item style="margin-left: 7px">[[sermon.title]]</paper-item>
+                  </template>
+                </paper-menu>
+                </paper-submenu>
+            </template>
+          </paper-menu>
+        </paper-header-panel>
+        
+        <!-- Content -->
+        <paper-header-panel main>
+          <paper-toolbar>
+            <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+            <div>HdH Mannheim PredigtHub</div>
+          </paper-toolbar>
+          
+          <!-- Series List -->
+          <iron-list items="[[data]]" as="series">
+            <!-- Series Template -->
+            <template>
+              <div>
+                <paper-material class="general-inner-spacing-tb general-spacing vertical center-justified layout" elevation="3">
+                    <img src="[[series.coverImage]]" class="self-center">
+                    <iron-collapse class="general-inner-spacing-lr" opened>
+                      
+                      <!-- Sermon List -->
+                      <iron-list items="[[series.sermons]]" as="sermon">
+                        <!-- Sermon Template -->
+                        <template>
+                          <div class="horizontal layout">
+                            <div class="flex vertical center-justified layout">
+                              <div class="self-center general-inner-spacing-tb">[[sermon.video]]</div>
+                            </div>
+                            <div class="flex vertical center-justified layout">
+                              <div class="flex self-center general-inner-spacing-tb">[[sermon.description]]</div>
+                              <div class="flex self-center general-inner-spacing-tb">[[sermon.audio]]</div>
+                            </div>
+                          </div>
+                        </template>
+                      </iron-list>
+                      
+                    </iron-collapse>
+                </paper-material>
+              </div>
+            </template>
+          </iron-list>
+        
+        </paper-header-panel>
+      
+      </paper-drawer-panel>
+    </template>
+  </body>
 </html>
