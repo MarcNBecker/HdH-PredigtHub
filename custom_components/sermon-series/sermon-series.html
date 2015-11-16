@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+    
+
+<dom-module id="sermon-series">
+
+  <template>
+    <style>
+      @import url("../../resources/styles/main.css") screen;
+
+      #coverImage {
+        cursor: pointer;
+      }
+    </style>
+    <!-- Sermon Series -->
+    <div>
+      <paper-material class="general-inner-spacing-tb general-spacing vertical center-justified layout" elevation="3">
+          <img id="coverImage" src="[[series.coverImage]]" on-click="toggle" class="self-center">
+          <iron-collapse id="collapsable" class="general-inner-spacing-lr">
+            
+            <!-- Sermon Template -->
+            <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
+              <div class="horizontal layout">
+                <div class="flex vertical center-justified layout">
+                  <div class="self-center general-inner-spacing-tb">[[sermon.video]]</div>
+                </div>
+                <div class="flex vertical center-justified layout">
+                  <div class="flex self-center general-inner-spacing-tb">[[sermon.description]]</div>
+                  <div class="flex self-center general-inner-spacing-tb">[[sermon.audio]]</div>
+                </div>
+              </div>
+            </template>
+            
+          </iron-collapse>
+      </paper-material>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "sermon-series",
+
+      properties: {
+        series: Object,
+        opened: Boolean
+      },
+
+      toggle: function() {
+        this.opened = !this.opened;
+        this.$.collapsable.toggle();
+        console.log("hello");
+      }
+    });
+  </script>
+
+</dom-module>

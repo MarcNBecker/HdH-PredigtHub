@@ -18,8 +18,6 @@
     <link rel="import"
           href="bower_components/paper-icon-button/paper-icon-button.html">
     <link rel="import"
-          href="bower_components/paper-material/paper-material.html">
-    <link rel="import"
           href="bower_components/paper-menu/paper-menu.html">
     <link rel="import"
           href="bower_components/paper-menu/paper-submenu.html">
@@ -32,14 +30,18 @@
     <link rel="import"
           href="bower_components/iron-list/iron-list.html">
     <link rel="import"
-          href="bower_components/iron-collapse/iron-collapse.html">
-    <link rel="import"
           href="bower_components/iron-ajax/iron-ajax.html">
     <link rel="import"
           href="bower_components/font-roboto/roboto.html">
+
+    <!-- Custom Polymer dependecies -->
+    <link rel="import"
+          href="custom_components/sermon-series/sermon-series.html">
     
     <!-- Main CSS -->
-    <link rel="stylesheet" href="resources/styles/main.css" type="text/css" media="screen" />
+    <style>
+      @import url("resources/styles/main.css") screen;
+    </style>
 
   </head>
 
@@ -75,36 +77,10 @@
           </paper-toolbar>
           
           <!-- Series List -->
-          <iron-list items="[[data]]" as="series">
-            <!-- Series Template -->
-            <template>
-              <div>
-                <paper-material class="general-inner-spacing-tb general-spacing vertical center-justified layout" elevation="3">
-                    <img src="[[series.coverImage]]" class="self-center">
-                    <iron-collapse class="general-inner-spacing-lr" opened>
-                      
-                      <!-- Sermon List -->
-                      <iron-list items="[[series.sermons]]" as="sermon">
-                        <!-- Sermon Template -->
-                        <template>
-                          <div class="horizontal layout">
-                            <div class="flex vertical center-justified layout">
-                              <div class="self-center general-inner-spacing-tb">[[sermon.video]]</div>
-                            </div>
-                            <div class="flex vertical center-justified layout">
-                              <div class="flex self-center general-inner-spacing-tb">[[sermon.description]]</div>
-                              <div class="flex self-center general-inner-spacing-tb">[[sermon.audio]]</div>
-                            </div>
-                          </div>
-                        </template>
-                      </iron-list>
-                      
-                    </iron-collapse>
-                </paper-material>
-              </div>
-            </template>
-          </iron-list>
-        
+          <template is="dom-repeat" items="[[data]]" as="series">
+            <sermon-series series="[[series]]"></sermon-series>  
+          </template>
+          
         </paper-header-panel>
       
       </paper-drawer-panel>
