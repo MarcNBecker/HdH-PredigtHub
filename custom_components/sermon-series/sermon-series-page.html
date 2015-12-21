@@ -1,0 +1,119 @@
+<!-- Polymer dependencies -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-submenu.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/font-roboto/roboto.html">
+
+<!-- Package Polymer dependecies -->
+<link rel="import" href="sermon-series.html">
+
+
+<dom-module id="sermon-series-page">
+
+  <template>
+    <style>
+    </style>
+
+  <!-- Sermon Series Page -->
+	<iron-ajax url="../../server/data.json" last-response="{{data}}" on-response="reloadHash" auto></iron-ajax>
+	<paper-drawer-panel class="flex">
+
+	<!-- Drawer -->
+	<paper-header-panel drawer>
+	  <paper-toolbar>
+	    <div>Predigtreihen</div>
+	  </paper-toolbar>
+	  <paper-menu>
+	    <template is="dom-repeat" items="[[data]]" as="series">
+	      <paper-submenu opened$="[[series.opened]]">
+	        <paper-item class="menu-trigger" on-click="navigate" active$="[[series.opened]]">[[series.title]]</paper-item>
+	        <paper-menu class="menu-content">
+	          <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
+	            <paper-item style="margin-left: 7px" on-click="navigate" series="[[series]]">[[sermon.title]]</paper-item>
+	          </template>
+	        </paper-menu>
+	        </paper-submenu>
+	    </template>
+	  </paper-menu>
+	</paper-header-panel>
+
+	<!-- Content -->
+	<paper-header-panel main>
+	  <paper-toolbar>
+	    <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+	    <div>HdH Mannheim PredigtHub</div>
+	  </paper-toolbar>
+	  
+	  <!-- Series List -->
+	  <template is="dom-repeat" items="[[data]]" as="series">
+	    <sermon-series series="[[series]]" id="series[[series.id]]"></sermon-series>  
+	  </template>
+	  
+	</paper-header-panel>
+
+	</paper-drawer-panel>
+  </template>
+
+  <script>
+    Polymer({
+      is: "sermon-series-page",
+
+      properties: {
+        selectedSeries: 1
+      },
+
+      navigate: function(e) {
+      	var target = e.model.series.id;
+      	if(e.model.sermon) {
+      		target = target + "-" + e.model.sermon.id;
+      	}
+      	window.location.hash = target;
+      },
+
+      reloadHash: function() {
+        var hash = window.location.hash;
+        var seperatorPos = hash.indexOf("-");
+        if (!hash) {
+          var series = 0;
+          var sermon = 0;
+        } else if(seperatorPos === -1) {
+          var series = hash.substring(1, hash.length);
+          var sermon = 0;
+        } else {
+          var series = hash.substring(1, seperatorPos);
+          var sermon = hash.substring(seperatorPos, hash.length);
+        }
+
+        this.viewToModel(series, sermon);
+      },
+
+      viewToModel: function(seriesId, sermonId) {
+      	for(i=0; i<this.data.length; i++) {
+          if(this.data[i].id == seriesId) {
+            this.set('data.' + i + '.opened', true);
+            this.set('selectedSeries', seriesId);
+          } else {
+            this.set('data.' + i + '.opened', false);
+          }
+        }
+      }
+    });
+  </script>
+
+  <script>
+  	window.onhashchange = function() {
+  		document.querySelector('sermon-series-page').reloadHash();
+  	}
+  </script>
+
+</dom-module>

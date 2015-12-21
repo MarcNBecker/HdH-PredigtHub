@@ -2,14 +2,14 @@
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/font-roboto/roboto.html">
     
 
 <dom-module id="sermon-series">
 
   <template>
     <style>
-      @import url("../../resources/styles/main.css") screen;
-
       #coverImage {
         cursor: pointer;
       }
@@ -17,8 +17,8 @@
     <!-- Sermon Series -->
     <div>
       <paper-material class="general-inner-spacing-tb general-spacing vertical center-justified layout" elevation="3">
-          <img id="coverImage" src="[[series.coverImage]]" on-click="toggle" class="self-center">
-          <iron-collapse id="collapsable" class="general-inner-spacing-lr">
+          <img id="coverImage" src="[[series.coverImage]]" on-click="navigate" class="self-center">
+          <iron-collapse class="general-inner-spacing-lr" opened$="[[series.opened]]">
             
             <!-- Sermon Template -->
             <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
@@ -43,15 +43,13 @@
       is: "sermon-series",
 
       properties: {
-        series: Object,
-        opened: Boolean
+        series: Object
       },
 
-      toggle: function() {
-        this.opened = !this.opened;
-        this.$.collapsable.toggle();
-        console.log("hello");
+      navigate: function() {
+        window.location.hash = this.series.id;
       }
+
     });
   </script>
 

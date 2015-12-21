@@ -2,6 +2,10 @@ body {
 	font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+paper-item {
+	cursor: pointer;
+}
+
 .general-spacing {
 	margin-top: 10px;
 	margin-left: 10px;
@@ -17,3 +21,4 @@ body {
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
