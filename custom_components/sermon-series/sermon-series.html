@@ -22,13 +22,26 @@
             
             <!-- Sermon Template -->
             <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
+              <!-- Spacer -->
+              <div class="general-inner-spacing-tb horizontal layout" hidden$="[[isSpacerHidden(sermon.id)]]">
+                <div class="flex"></div>
+                <svg height="2" width="1000">
+                  <line x1="0" y1="0" x2="1000" y2="0" style="stroke:rgb(0,0,0);stroke-width:2" />
+                </svg>
+                <div class="flex"></div>
+              </div>
+              <!-- Sermon -->
               <div id="sermon[[series.id]]-[[sermon.id]]" class="horizontal layout">
                 <div class="flex vertical center-justified layout">
-                  <div class="self-center general-inner-spacing-tb">[[sermon.video]]</div>
+                  <div class="self-center general-inner-spacing-tb">
+                    <iframe src="https://player.vimeo.com/video/[[sermon.video]]" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                  </div>
                 </div>
                 <div class="flex vertical center-justified layout">
-                  <div class="flex self-center general-inner-spacing-tb">[[sermon.description]]</div>
-                  <div class="flex self-center general-inner-spacing-tb">[[sermon.audio]]</div>
+                  <div class="flex self-center general-inner-spacing-tb">[[sermon.description]] bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</div>
+                  <div class="flex self-center general-inner-spacing-tb">
+                    <iframe width="500" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/[[sermon.audio]]"></iframe>
+                  </div>
                 </div>
               </div>
             </template>
@@ -48,6 +61,14 @@
 
       navigate: function() {
         window.location.hash = this.series.id;
+      },
+
+      isSpacerHidden: function(sermonId) {
+        if(sermonId == 1) {
+          return true;
+        } else {
+          return false;
+        }
       }
 
     });

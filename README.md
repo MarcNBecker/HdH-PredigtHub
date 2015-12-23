@@ -2,5 +2,6 @@
 
 ## TODOs:
 
-- Integrate audio and video player
-- Replace dummy dummy data with useful dummy data
+- Make webpage mobile ready
+- Test with other browsers
+- Replace dummy data with useful data (& maybe adapt standard width/heights)
