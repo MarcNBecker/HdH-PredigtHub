@@ -36,30 +36,170 @@
   },
   {
     "id": 3,
-  	"title": "Predigtreihe",
-  	"coverImage": "resources/img/logo.png",
-  	"sermons": [
-  		{
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
         "id": 1,
-  			"video": "Video",
-  			"audio": "Audio",
-  			"description": "Text",
-  			"title": "Predigt"
-  		},
-  		{
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
         "id": 2,
-  			"video": "Video",
-  			"audio": "Audio",
-  			"description": "Text",
-  			"title": "Predigt"
-  		},
-  		{
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
         "id": 3,
-  			"video": "Video",
-  			"audio": "Audio",
-  			"description": "Text",
-  			"title": "Predigt"
-  		}
-  	]
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
+        "id": 1,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 2,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 3,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
+        "id": 1,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 2,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 3,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
+        "id": 1,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 2,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 3,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
+        "id": 1,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 2,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 3,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Predigtreihe",
+    "coverImage": "resources/img/logo.png",
+    "sermons": [
+      {
+        "id": 1,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 2,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      },
+      {
+        "id": 3,
+        "video": "Video",
+        "audio": "Audio",
+        "description": "Text",
+        "title": "Predigt"
+      }
+    ]
   }
 ]

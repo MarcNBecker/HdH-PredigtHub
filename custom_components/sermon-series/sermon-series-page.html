@@ -6,9 +6,9 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../../bower_components/paper-menu/paper-submenu.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
@@ -22,6 +22,15 @@
 
   <template>
     <style>
+      .selectedSermonItem {
+        margin-left: 7px;
+        font-weight: bold;
+      }
+
+      .unselectedSermonItem {
+        margin-left: 7px;
+      }
+
     </style>
 
   <!-- Sermon Series Page -->
@@ -33,17 +42,17 @@
 	  <paper-toolbar>
 	    <div>Predigtreihen</div>
 	  </paper-toolbar>
-	  <paper-menu>
+	  <paper-menu selectable="paper-item" selected="[[selectedSeries]]">
 	    <template is="dom-repeat" items="[[data]]" as="series">
-	      <paper-submenu opened$="[[series.opened]]">
-	        <paper-item class="menu-trigger" on-click="navigate" active$="[[series.opened]]">[[series.title]]</paper-item>
-	        <paper-menu class="menu-content">
-	          <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
-	            <paper-item style="margin-left: 7px" on-click="navigate" series="[[series]]">[[sermon.title]]</paper-item>
-	          </template>
-	        </paper-menu>
-	        </paper-submenu>
-	    </template>
+        <!-- Series Menu Item -->
+        <paper-item on-click="navigate">[[series.title]]</paper-item>
+        <!-- Sermon Menu Items -->
+        <iron-collapse opened$="[[series.opened]]">
+          <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
+            <paper-item class$="[[isSermonItemSelected(selectedSermon, sermon.opened)]]" on-click="navigate" series="[[series]]">[[sermon.title]]</paper-item>
+          </template>
+        </iron-collapse>
+      </template>
 	  </paper-menu>
 	</paper-header-panel>
 
@@ -69,7 +78,8 @@
       is: "sermon-series-page",
 
       properties: {
-        selectedSeries: 1
+        selectedSeries: -1,
+        selectedSermon: -1
       },
 
       navigate: function(e) {
@@ -91,20 +101,57 @@
           var sermon = 0;
         } else {
           var series = hash.substring(1, seperatorPos);
-          var sermon = hash.substring(seperatorPos, hash.length);
+          var sermon = hash.substring(seperatorPos + 1, hash.length);
         }
 
         this.viewToModel(series, sermon);
+
+        if(series >= 0 && sermon >= 0) {
+          document.getElementById('series' + series).scrollIntoView();
+        } else if (series >= 0) {
+          document.getElementById('sermon' + series + '-' + sermon).scrollIntoView();
+        }
       },
 
       viewToModel: function(seriesId, sermonId) {
       	for(i=0; i<this.data.length; i++) {
-          if(this.data[i].id == seriesId) {
+          var series = this.data[i];
+          if(series.id == seriesId) {
             this.set('data.' + i + '.opened', true);
-            this.set('selectedSeries', seriesId);
+            this.set('selectedSeries', i);
+            var seriesSet = true;
           } else {
             this.set('data.' + i + '.opened', false);
           }
+
+          var sermons = series.sermons;
+          for(ii=0; ii<sermons.length; ii++) {
+            var sermon = sermons[ii];
+            if(series.id == seriesId && sermon.id == sermonId) {
+              this.set('data.' + i + '.sermons.' + ii + '.opened', true);
+              this.set('selectedSermon', ii);
+              var sermonSet = true;
+            } else {
+              this.set('data.' + i + '.sermons.' + ii + '.opened', false);
+            } 
+          }
+        }
+
+        if(!seriesSet) {
+          this.set('selectedSeries', -1);
+        }
+        
+        if(!sermonSet) {
+          this.set('selectedSermon', -1);
+        }
+
+      },
+
+      isSermonItemSelected: function(change, opened) {
+        if(opened) {
+          return "selectedSermonItem";
+        } else {
+          return "unselectedSermonItem";
         }
       }
     });

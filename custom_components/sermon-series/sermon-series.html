@@ -22,7 +22,7 @@
             
             <!-- Sermon Template -->
             <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
-              <div class="horizontal layout">
+              <div id="sermon[[series.id]]-[[sermon.id]]" class="horizontal layout">
                 <div class="flex vertical center-justified layout">
                   <div class="self-center general-inner-spacing-tb">[[sermon.video]]</div>
                 </div>
