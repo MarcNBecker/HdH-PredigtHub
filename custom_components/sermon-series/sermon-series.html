@@ -14,6 +14,26 @@
       #coverImage {
         cursor: pointer;
       }
+
+      .videoMobile {
+        width: 80vw; 
+        height: 45vw;
+      }
+
+      .video {
+        width: 500px;
+        height: 281px;
+      }
+
+      .audioMobile {
+        width: 80vw;
+        height: 166px;
+      }
+
+      .audio {
+        width: 500px;
+        height: 166px;
+      }
     </style>
     <!-- Media Query for responsiveness -->
     <iron-media-query query="(max-width: 1350px)" query-matches="{{isMobile}}"></iron-media-query>
@@ -25,28 +45,33 @@
             
             <!-- Sermon Template -->
             <template is="dom-repeat" items="[[series.sermons]]" as="sermon">
-              <!-- Spacer -->
-              <div class="general-inner-spacing-tb horizontal layout" hidden$="[[isSpacerHidden(sermon.id)]]">
-                <div class="flex"></div>
-                <svg height="2" width="1000">
-                  <line x1="0" y1="0" x2="1000" y2="0" style="stroke:rgb(0,0,0);stroke-width:2" />
-                </svg>
-                <div class="flex"></div>
-              </div>
-              <!-- Sermon -->
-              <div id="sermon[[series.id]]-[[sermon.id]]" class$="[[getLayout(isMobile)]]">
-                <div class="flex vertical center-justified layout">
-                  <div class="self-center general-inner-spacing-tb">
-                    <iframe src="https://player.vimeo.com/video/[[sermon.video]]" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                  </div>
+              <div class="vertical layout">
+                <!-- Spacer -->
+                <div class="general-inner-spacing-tb horizontal layout" hidden$="[[isSpacerHidden(sermon.id)]]">
+                  <div class="flex"></div>
+                  <svg height="2" width="1000">
+                    <line x1="0" y1="0" x2="1000" y2="0" style="stroke:rgb(0,0,0);stroke-width:2" />
+                  </svg>
+                  <div class="flex"></div>
                 </div>
-                <div class="flex vertical center-justified layout">
-                  <div class="flex"></div>
-                  <div class="self-center general-inner-spacing-tb">[[sermon.description]]</div>
-                  <div class="flex"></div>
-                  <div class="self-center general-inner-spacing-tb">
-                    <iframe width="500" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/[[sermon.audio]]"></iframe>
+                <!-- Sermon -->
+                <div id="sermon[[series.id]]-[[sermon.id]]" class$="[[getLayout(isMobile)]]">
+                  <div class="flex" hidden$="[[isMobile]]"></div>
+                  <div class="vertical center-justified layout">
+                    <div class="self-center general-inner-spacing-tb">
+                      <iframe src="https://player.vimeo.com/video/[[sermon.video]]" class$="[[getElementLayout(isMobile, 'video')]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
                   </div>
+                  <div class="flex" hidden$="[[isMobile]]"></div>
+                  <div class="vertical center-justified layout">
+                    <div class="flex"></div>
+                    <div class="self-center general-inner-spacing-tb">[[sermon.description]]</div>
+                    <div class="flex"></div>
+                    <div class="self-center general-inner-spacing-tb">
+                      <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/[[sermon.audio]]" class$="[[getElementLayout(isMobile, 'audio')]]" scrolling="no" frameborder="no"></iframe>
+                    </div>
+                  </div>
+                  <div class="flex" hidden$="[[isMobile]]"></div>
                 </div>
               </div>
             </template>
@@ -81,6 +106,14 @@
           return "layout vertical-reverse";
         } else {
           return "layout horizontal";
+        }
+      },
+
+      getElementLayout: function(isMobile, identifier) {
+        if(isMobile) {
+          return identifier + "Mobile";
+        } else {
+          return identifier;
         }
       }
 

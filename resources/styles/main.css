@@ -6,6 +6,10 @@ paper-item {
 	cursor: pointer;
 }
 
+iron-collapse {
+	overflow: hidden;
+}
+
 .general-spacing {
 	margin-top: 10px;
 	margin-left: 10px;
