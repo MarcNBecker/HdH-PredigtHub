@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/font-roboto/roboto.html">
     
 
@@ -14,6 +15,8 @@
         cursor: pointer;
       }
     </style>
+    <!-- Media Query for responsiveness -->
+    <iron-media-query query="(max-width: 1350px)" query-matches="{{isMobile}}"></iron-media-query>
     <!-- Sermon Series -->
     <div>
       <paper-material class="general-inner-spacing-tb general-spacing vertical center-justified layout" elevation="3">
@@ -31,15 +34,17 @@
                 <div class="flex"></div>
               </div>
               <!-- Sermon -->
-              <div id="sermon[[series.id]]-[[sermon.id]]" class="horizontal layout">
+              <div id="sermon[[series.id]]-[[sermon.id]]" class$="[[getLayout(isMobile)]]">
                 <div class="flex vertical center-justified layout">
                   <div class="self-center general-inner-spacing-tb">
                     <iframe src="https://player.vimeo.com/video/[[sermon.video]]" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                   </div>
                 </div>
                 <div class="flex vertical center-justified layout">
-                  <div class="flex self-center general-inner-spacing-tb">[[sermon.description]] bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</div>
-                  <div class="flex self-center general-inner-spacing-tb">
+                  <div class="flex"></div>
+                  <div class="self-center general-inner-spacing-tb">[[sermon.description]]</div>
+                  <div class="flex"></div>
+                  <div class="self-center general-inner-spacing-tb">
                     <iframe width="500" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/[[sermon.audio]]"></iframe>
                   </div>
                 </div>
@@ -68,6 +73,14 @@
           return true;
         } else {
           return false;
+        }
+      },
+
+      getLayout: function(isMobile) {
+        if(isMobile) {
+          return "layout vertical-reverse";
+        } else {
+          return "layout horizontal";
         }
       }
 

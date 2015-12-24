@@ -35,7 +35,7 @@
 
   <!-- Sermon Series Page -->
 	<iron-ajax url="../../server/data.json" last-response="{{data}}" on-response="reloadHash" auto></iron-ajax>
-	<paper-drawer-panel class="flex">
+	<paper-drawer-panel responsive-width="900px" class="flex">
 
 	<!-- Drawer -->
 	<paper-header-panel drawer>
@@ -106,11 +106,13 @@
 
         this.viewToModel(series, sermon);
 
-        if(series >= 0 && sermon >= 0) {
-          document.getElementById('series' + series).scrollIntoView();
-        } else if (series >= 0) {
-          document.getElementById('sermon' + series + '-' + sermon).scrollIntoView();
-        }
+        this.async(function() {
+          if(series > 0 && sermon > 0) {
+            document.getElementById('sermon' + series + '-' + sermon).scrollIntoView();
+          } else if (series > 0) {
+            document.getElementById('series' + series).scrollIntoView();
+          }
+        }, 300);
       },
 
       viewToModel: function(seriesId, sermonId) {
